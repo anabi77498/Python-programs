@@ -1,19 +1,23 @@
 import sys
 
-#Checks if DNA is in fact DNA
+""" Checks if DNA is in fact DNA
+    input = str """
 def DNA_checker(DNA):
     for i in range(len(DNA)):
         if DNA[i] not in "ACGT":
             return -1
 
-#Gives Nitrogenous base % rounded to first place
+
+""" Gives Nitrogenous base % rounded to first place
+    input = str (DNA) """
 def n_percentage(DNA):
     for base in 'AGCT':
         percent = round(DNA.count(base) / len(DNA) * 100, 2)
         print('Base ' + base + ' percentage: ' + str(percent) + "%")
 
 
-#Makes DNA to RNA (assumed DNA is template strand)
+""" Makes DNA to RNA (assumed DNA is template strand)
+    input = str (DNA) """
 def RNA_polymerase(DNA):
     mRNA = ""
     dna_to_rna = {'A':'U', 'G':'C', 'C':'G','T':'A'}
@@ -21,12 +25,16 @@ def RNA_polymerase(DNA):
         mRNA += dna_to_rna[DNA[i]]
     return mRNA
 
-#Prints out RNA transcripted from DNA
+
+""" Prints out RNA transcripted from DNA
+    input = str (DNA) """
 def DNA_transcription(DNA):
     RNA = RNA_polymerase(DNA)
     print('mRNA: ' + str(RNA))
 
 
+""" Converts DNA to protein
+    input = str (DNA) """
 def Protein_synthesis(DNA):
     table = {
 		'ATA':'I', 'ATC':'I', 'ATT':'I', 'ATG':'M',
@@ -54,12 +62,19 @@ def Protein_synthesis(DNA):
         protein += table[codon]
     return protein
 
-#DNA translation
+
+""" DNA translation
+    input = str (DNA) """
 def DNA_translation(DNA):
     protein = Protein_synthesis(DNA)
     print("Protein: " + protein)
 
 
+""" Main function that automates processes for user
+    inputs = None
+    function internal input 1 = int
+    function internal input 2 = string
+"""
 def main():
     print('Choose Process: \n (1) DNA Transcription \n (2) DNA Translation \n')
     command = input("type '1' or '2' only' \n")
