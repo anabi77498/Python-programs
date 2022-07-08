@@ -75,7 +75,6 @@ except FileNotFoundError:
     sys.exit(2)
 
 # selects the filter chosen by the user
-
 new_img = op_list[sys.argv[2]](img)
 
 # saves image and gives image name as user input
