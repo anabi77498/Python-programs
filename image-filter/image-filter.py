@@ -9,10 +9,6 @@ output: transformed images based on selected filter
 
 '''
 
-
-# Options for filter: greyscale, flip, invert, mirror, blur, smooth
-opt_list = ["grayscale", "flip", "invert", "mirror", "blur", "smooth"]
-
 # Transforms image to grayscale rgb values (50,50,50)
 def grayscale(img):
     new_img = ImageOps.grayscale(img)
@@ -52,13 +48,17 @@ def smooth(img):
         new_img = img.filter(ImageFilter.SMOOTH_MORE)
     return new_img
 
+# Options for filter: greyscale, flip, invert, mirror, blur, smooth
+op_list = {"grayscale":grayscale, "flip":flip, "invert":invert, 
+                "mirror":mirror, "blur":blur, "smooth":smooth}
+
 # ensures that user is adhering to arguments
 def argv_check(argv):
     if len(argv) != 3:
-        print("\nerror - input command-line argument must be three \n\nformat: \n\"image-filter.py imgfile-name filter-name\"\n")
+        print("\nerror - input command-line argument vector length must be three \n\nformat: \n\"image-filter.py imgfile-name filter-name\"\n")
         sys.exit(1)
 
-    if argv[2] not in opt_list:
+    if argv[2] not in op_list:
         print("\nerror - input command must be a filter \n\nformat: \n\"image-filter.py imgfile-name filter-name\"\n")
         print("filters: \n~greyscale \n~flip \n~invert \n~mirror \n~blur \n~smooth\n")
         sys.exit(1)
@@ -75,18 +75,8 @@ except FileNotFoundError:
     sys.exit(2)
 
 # selects the filter chosen by the user
-if sys.argv[2] == 'grayscale':
-    new_img = grayscale(img)
-if sys.argv[2] == 'flip':
-    new_img = flip(img)
-if sys.argv[2] == 'invert':
-    new_img = invert(img)
-if sys.argv[2] == 'mirror':
-    new_img = mirror(img)
-if sys.argv[2] == 'blur':
-    new_img = blur(img) 
-if sys.argv[2] == 'smooth':
-    new_img = smooth(img) 
+
+new_img = op_list[sys.argv[2]](img)
 
 # saves image and gives image name as user input
 print("Saving Image ...")
