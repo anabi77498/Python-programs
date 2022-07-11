@@ -1,52 +1,55 @@
 import sys
 from PIL import Image, ImageEnhance
 
-
 '''
 
-input:(format in command line argument) image-filter.py imgfile-name enhance-feature
+input:(format in command line argument) image-filter.py imgfile-name enhancement
 
 output: transformed images based on selected enhancement
 
 '''
 
+# Enhances brightness of image by a designated factor
 def brightness(img):
     en_img = ImageEnhance.Brightness(img)
     factor = int(input("Enhance factor: "))
     new_img = en_img.enhance(factor)
     return new_img
 
+# Enhances color (vibrance) of image by a designated factor
 def color(img):
     en_img = ImageEnhance.Color(img)
     factor = int(input("Enhance factor: "))
     new_img = en_img.enhance(factor)
     return new_img
 
+# Enhances contrast of image by a designated factor
 def contrast(img):
     en_img = ImageEnhance.Contrast(img)
     factor = int(input("Enhance factor: "))
     new_img = en_img.enhance(factor)
     return new_img
 
+# Enhances sharpness of image by a designated factor
 def sharpness(img):
     en_img = ImageEnhance.Sharpness(img)
     factor = int(input("Enhance factor: "))
     new_img = en_img.enhance(factor)
     return new_img
 
-
+# list of possible operations: brightness, color, contrast, sharpness
 op_list = {"brightness":brightness, "color":color,
     "contrast":contrast, "sharpness":sharpness}
 
 # ensures that user is adhering to arguments
 def argv_check(argv):
     if len(argv) != 3:
-        print("\nerror - input command-line argument vector length must be three \n\nformat: \n\"image-filter.py imgfile-name filter-name\"\n")
+        print("\nerror - input command-line argument vector length must be three \n\nformat: \n\"image-filter.py imgfile-name enhancement-name\"\n")
         sys.exit(1)
 
     if argv[2].lower() not in op_list:
-        print("\nerror - input command must be a filter \n\nformat: \n\"image-filter.py imgfile-name filter-name\"\n")
-        print("filters: \n~greyscale \n~flip \n~invert \n~mirror \n~blur \n~smooth\n")
+        print("\nerror - input command must be a filter \n\nformat: \n\"image-filter.py imgfile-name enhancement-name\"\n")
+        print("enhancements: \n~brightness \n~color \n~contrast \n~sharpness\n")
         sys.exit(1)
 
 
