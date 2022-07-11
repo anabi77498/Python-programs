@@ -58,7 +58,7 @@ def argv_check(argv):
         print("\nerror - input command-line argument vector length must be three \n\nformat: \n\"image-filter.py imgfile-name filter-name\"\n")
         sys.exit(1)
 
-    if argv[2] not in op_list:
+    if argv[2].lower() not in op_list:
         print("\nerror - input command must be a filter \n\nformat: \n\"image-filter.py imgfile-name filter-name\"\n")
         print("filters: \n~greyscale \n~flip \n~invert \n~mirror \n~blur \n~smooth\n")
         sys.exit(1)
@@ -75,9 +75,9 @@ except FileNotFoundError:
     sys.exit(2)
 
 # selects the filter chosen by the user
-new_img = op_list[sys.argv[2]](img)
+new_img = op_list[sys.argv[2].lower()](img)
 
 # saves image and gives image name as user input
-print("Saving Image ...")
+print("Saving Image as bmp ...")
 imagename = input("Image Name: ")
-new_img.save(imagename)
+new_img.save(imagename + ".bmp")
