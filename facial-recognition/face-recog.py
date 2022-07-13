@@ -126,13 +126,3 @@ if choice_save == 'yes':
 print("\nOpening images ...")
 new_test_img.show()
 found_face.show()
-
-
-
-
-
-
-
-
-
-
