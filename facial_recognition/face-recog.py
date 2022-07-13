@@ -16,7 +16,7 @@ def selections(question):
     choice = input(question)
     while choice.lower() not in ['yes', 'no']:
         print("\ntype 'yes' or 'no'\n")
-        choice = input("Save recognized faces as new image? ")
+        choice = input(question)
     return choice.lower()
 
 argv_check(sys.argv)
@@ -34,7 +34,16 @@ except FileNotFoundError:
     sys.exit(2)
 
 
-print('\nprocessing ...\n')
+print('\nKnown image: ' + sys.argv[1])
+print('Unknown image: ' + sys.argv[2] + '\n')
+
+check = selections('Is this correct: ')
+if check == 'no':
+    print('\nAborting program ...')
+    print("Command Line Format: face-recog.py known-face-image unknown-face-image\n")
+    sys.exit(1)
+
+print('\nprocessing images ...')
 
 train_encoding = frecog.face_encodings(train_img)[0]
 
@@ -63,17 +72,31 @@ for (top, right, bottom, left), faces in zip(test_face_locations, test_encodings
 
         # Draw a box around the face using the Pillow module
         draw.rectangle(((left - 25, top - 25), (right + 25, bottom + 25)), outline=(255, 0, 0), width=20)
-    
-        #
+
+
+        facelocation = test_img[top:bottom, left:right]
+        found_face = Image.fromarray(facelocation)
+
+        choice_newimg = selections("Save recognized faces as seperate new image? ")
+        if choice_newimg == 'yes':
+            name_n = input("Image name: ")
+            print('\nSaving ' + name_n +  ' as PNG ...')
+            found_face.save(name_n + '.PNG')
 
 # Remove the drawing library from memory as per the Pillow docs
 del draw
 
+choice_save = selections("\nSave modified image as new image? ")
 
 #
+if choice_save == 'yes':
+    name_s = input("Image name: ")
+    print('\nSaving ' + name_s + ' as PNG ...')
+    new_test_img.save(name_s + '.PNG')
 
-print("\nOpening Saved Images ...")
+print("\nOpening Images ...")
 new_test_img.show()
+found_face.show()
 
 
 
