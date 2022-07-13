@@ -112,15 +112,15 @@ found_face, new_test_img = HOG_model(train_img, test_img)
 choice_newimg = selections("Save recognized faces as seperate new image? ")
 if choice_newimg == 'yes':
     name_n = input("Image name: ")
-    print('\nSaving ' + name_n +  ' as PNG ...\n')
-    found_face.save(name_n + '.PNG')
+    print('\nSaving ' + name_n +  ' as jpg ...\n')
+    found_face.save(name_n + '.jpg')
 
 # option to save image image drawn on
 choice_save = selections("Save modified image as new image? ")
 if choice_save == 'yes':
     name_s = input("Image name: ")
-    print('\nSaving ' + name_s + ' as PNG ...')
-    new_test_img.save(name_s + '.PNG')
+    print('\nSaving ' + name_s + ' as jpg ...')
+    new_test_img.save(name_s + '.jpg')
 
 # opening found faces
 print("\nOpening images ...")
