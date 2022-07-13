@@ -72,6 +72,9 @@ def HOG_model(train_img, test_img):
             # returning image of found face and the image drawn on
             return found_face, new_test_img
 
+
+# MAIN BELOW
+
 #checking command line argument
 argv_check(sys.argv)
 
